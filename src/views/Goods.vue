@@ -57,6 +57,8 @@
                     <tr
                     v-for="(good, index) in goodsList"
                     :key="good.id"
+                    @click = "goToGood(good.id)"
+                    class = "goods-list"
                     >
                         <td>{{ index + 1 }}</td>
                         <td>{{ good.invoice_detail[0] }}</td>
@@ -97,9 +99,14 @@ export default {
                     Authorization: 'Token ' + localStorage.getItem('usertoken')
                 }
             }).then((response) => {
-               
+               window.localStorage.removeItem('goodsList')
+               window.localStorage.setItem('goodsList', response.data)
+               console.log(response.data[0])
                 this.goodsList = response.data
             })
+        },
+        goToGood(id){
+            this.$router.push('/goods/'+ id)
         }
     },
     mounted(){
@@ -107,3 +114,7 @@ export default {
     }
 }
 </script>
+<style lang="sass" scoped>
+.goods-list
+    cursor: pointer
+</style>

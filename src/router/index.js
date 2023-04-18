@@ -58,12 +58,6 @@ const routes = [
     component: () => import('../views/Registration/RegistrationAfter.vue')
   },
   {
-    path: '/main',
-    name: 'main',
-    meta: {layout: 'main'},
-    component: () => import('../views/Main.vue')
-  },
-  {
     path: '/invoices',
     name: 'invoices',
     meta: {layout: 'main'},
@@ -95,6 +89,12 @@ const routes = [
     component: () => import('../views/Goods.vue')
   },
   {
+    path: '/goods/:id',
+    name: 'goods-view',
+    meta: {layout: 'main'},
+    component: () => import('../views/GoodsAdd.vue')
+  },
+  {
     path: '/requests',
     name: 'requests',
     meta: {layout: 'main'},
@@ -124,6 +124,12 @@ const routes = [
     name: 'organizations',
     meta: {layout: 'main'},
     component: () => import('../views/Organization.vue')
+  },
+  {
+    path: '/returns',
+    name: 'returns',
+    meta: {layout: 'main'},
+    component: () => import('../views/Return.vue')
   },
   {
     path: '/about',

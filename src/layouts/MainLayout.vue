@@ -57,12 +57,6 @@
                         </v-list-item>
                     </router-link> -->
                     
-                    <router-link to="/main">
-                        <v-list-item>
-                            <v-list-item-title>Главная</v-list-item-title>
-                        </v-list-item>
-                    </router-link>
-
                     <router-link to="/invoices">
                         <v-list-item>
                             <v-list-item-title>Накладные</v-list-item-title>
@@ -84,6 +78,12 @@
                     <router-link to="/ozon">
                         <v-list-item>
                             <v-list-item-title>Накладные OZON</v-list-item-title>
+                        </v-list-item>
+                    </router-link>
+
+                    <router-link to="/returns">
+                        <v-list-item>
+                            <v-list-item-title>Возврат и брак</v-list-item-title>
                         </v-list-item>
                     </router-link>
 
