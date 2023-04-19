@@ -18,7 +18,11 @@
                     </router-link>
                 
             </v-container>
-            <h1>Изменение товара</h1>
+            <div class="cont">
+                <h1>Изменение товара</h1>
+                <button>Сохранить</button>
+            </div>
+            
             <div class = "wrapper">
                 <form>
                     <div class = "input-item">
@@ -30,50 +34,37 @@
                         <input v-bind:placeholder = goodsItem.vendor_code>
                     </div>
                     <div class = "input-item">
-                        <h2 class = "input-title">Кол-во</h2>
-                        <input v-bind:placeholder = goodsItem.good_quantity>
-                    </div>
-                    <div class = "input-item">
-                        <h2 class = "input-title">Кол-во коробок</h2>
-                        <input v-bind:placeholder = goodsItem.box_quantity>
-                    </div>
-                    <div class = "input-item">
-                        <h2 class = "input-title">Кол-во в коробке</h2>
-                        <input v-bind:placeholder = goodsItem.good_quantity_in_box>
-                    </div>
-                    <div class = "input-item">
-                        <h2 class = "input-title">Общий вес</h2>
-                        <input v-bind:placeholder = goodsItem.box_full_weight>
-                    </div>
-                    <div class = "input-item">
-                        <h2 class = "input-title">Вес одной штуки</h2>
-                        <input v-bind:placeholder = goodsItem.good_unit_weight>
+                        <h2 class = "input-title">Стоимость</h2>
+                        <input v-bind:placeholder = goodsItem.tax>
                     </div>
                     <div class = "input-item">
                         <h2 class = "input-title">Штрихкод</h2>
                         <input v-bind:placeholder = goodsItem.bar_code>
                     </div>
                     <div class = "input-item">
-                        <h2 class = "input-title">Цена НДС</h2>
-                        <input v-bind:placeholder = goodsItem.tax>
+                        <h2 class = "input-title">Кол-во</h2>
+                        <input v-bind:placeholder = goodsItem.good_quantity>
                     </div>
                     <div class = "input-item">
-                        <h2 class = "input-title">Высота</h2>
+                        <h2 class = "input-title">Вес</h2>
+                        <input v-bind:placeholder = goodsItem.box_full_weight>
+                    </div>
+                    <div class = "input-item">
+                        <h2 class = "input-title">Высота, м</h2>
                         <input v-bind:placeholder = goodsItem.height_m>
                     </div>
                     <div class = "input-item">
-                        <h2 class = "input-title">Ширина</h2>
+                        <h2 class = "input-title">Ширина, м</h2>
                         <input v-bind:placeholder = goodsItem.width_m>
                     </div>
                     <div class = "input-item">
-                        <h2 class = "input-title">Длина</h2>
+                        <h2 class = "input-title">Длина, м</h2>
                         <input v-bind:placeholder = goodsItem.length_m>
                     </div>
                     <div class = "input-item">
-                        <h2 class = "input-title">Объем</h2>
+                        <h2 class = "input-title">Объем, м3</h2>
                         <input v-bind:placeholder = goodsItem.capacity_m3>
                     </div>
-                    <button>Сохранить</button>
                 </form>
             </div>
         </div>
@@ -109,9 +100,20 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-h1
-    margin-left: 12vw
-    margin-bottom: 2vh
+.cont
+    display: flex
+    flex-direction: row
+    align-items: center
+    justify-content: space-between
+    h1
+        margin-left: 12vw
+        margin-bottom: 2vh
+    button
+        margin-right: 18vw
+        color: white
+        height: 4vh
+        width: 8vw
+        background-color: #439400
 .wrapper
     width: 100vw
     display: flex
@@ -123,7 +125,11 @@ h1
         display: grid
         grid-template-columns: 1fr 1fr 1fr 1fr
         .input-title
-        font-size: 0.9rem
+            font-size: 1.4rem
+            margin-top: 3vh
         input
-
+            border-radius: 10px
+            padding: 10px
+            border: 1px solid gray
+            font-size: 1.2rem
 </style>
