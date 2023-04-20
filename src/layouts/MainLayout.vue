@@ -169,6 +169,7 @@ export default {
 
 <style lang="scss" scoped>
 .main {
+    z-index: 200;
     height: 100%;
 		&__inner {
             

@@ -55,7 +55,7 @@
                         <td>{{ good.tax }}</td>
                         <td>{{ good.bar_code }}</td>
                         <td>{{ good.good_quantity }}</td>
-                        <td>{{ good.good_unit_weight }}</td>
+                        <td>{{ good.weight }}</td>
                         <td>{{ good.height_m }}</td>
                         <td>{{ good.width_m }}</td>
                         <td>{{ good.length_m }}</td>

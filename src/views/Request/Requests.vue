@@ -57,6 +57,10 @@
                             Страница заявки
                         </th>
                         
+                        <th class="text-left">
+                            Скачать маркировки
+                        </th>
+                        
                     </tr>
                 </thead>
                 
@@ -88,7 +92,9 @@
                                     </a>
                             </router-link>
                         </td>
-                        
+                         <td class="download-wrapper">
+                                <a href="/test.pdf" download="PDF" ><img src="../../assets/download-icon.png" alt="" class="download-icon"></a>
+                        </td>
                     </tr>
                 </tbody>
                 </template>
@@ -134,6 +140,12 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-
+<style lang="sass" scoped>
+.download-wrapper
+    display: flex
+    align-items: center
+    justify-content: center
+    .download-icon
+        width: 24px
+        height: 24px
 </style>

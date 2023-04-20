@@ -33,6 +33,9 @@
                             <th class="text-left">
                                 Получатель
                             </th>
+                            <th class="text-center">
+                                Скачать
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -58,6 +61,9 @@
                                 <!-- <p v-if="role == 'Client'">{{organization.fulfillment}}</p>
                                 <p v-if="role == 'Admin_ff'">eTrade Partner</p> -->
                                 eTrade Partner
+                            </td>
+                            <td class="download-wrapper">
+                                <a href="/test.pdf" download="PDF" ><img src="../assets/download-icon.png" alt="" class="download-icon"></a>
                             </td>
                         </tr>
                     </tbody>
@@ -168,3 +174,12 @@ import { BASE_URL } from '../helpers/const'
     }
   }
 </script>
+<style lang="sass" scoped>
+.download-wrapper
+    display: flex
+    align-items: center
+    justify-content: center
+    .download-icon
+        width: 24px
+        height: 24px
+</style>
