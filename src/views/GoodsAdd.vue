@@ -7,11 +7,11 @@
                     <button @click="closePopup">Ok</button>
                 </div>
                 <div class="fail-popup" v-if="this.responseChange.status != 200 && this.responseChange.status != 100">
-                    <h2>Данный не сохранились</h2>
+                    <h2>Данные не сохранились</h2>
                     <button @click="closePopup">Ok</button>
                 </div>
                 <div class="fail-popup" v-if="this.responseChange.status == 100">
-                    <h2>Данный сохраняются</h2>
+                    <h2>Данные сохраняются</h2>
                 </div>
             </div>
         </div>
