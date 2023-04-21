@@ -91,25 +91,16 @@
                             Артикул
                         </th>
                         <th class="text-left">
-                            шт.
-                        </th>
-                        <th class="text-left">
-                            Коробок
-                        </th>
-                        <th class="text-left">
-                            Кол-во в коробке
-                        </th>
-                        <th class="text-left">
-                            Общий вес коробки
-                        </th>
-                        <th class="text-left">
-                            Вес 1 шт. 
+                            Стоимость
                         </th>
                         <th class="text-left">
                             Штрих-код
                         </th>
                         <th class="text-left">
-                            Цена НДС
+                            Кол-во
+                        </th>
+                        <th class="text-left">
+                            Вес 
                         </th>
                         <th class="text-left">
                             Высота, м
@@ -132,15 +123,13 @@
                     >
                         <!-- <td>{{ good.invoice_detail[0] }}</td> -->
                         <td>{{ index + 1 }}</td>
+                        
                         <td>{{ good.title }}</td>
                         <td>{{ good.vendor_code }}</td>
-                        <td>{{ good.good_quantity }}</td>
-                        <td>{{ good.box_quantity }}</td>
-                        <td>{{ good.good_quantity_in_box }}</td>
-                        <td>{{ good.box_full_weight }}</td>
-                        <td>{{ good.good_unit_weight }}</td>
-                        <td>{{ good.bar_code }}</td>
                         <td>{{ good.tax }}</td>
+                        <td>{{ good.bar_code }}</td>
+                        <td>{{ good.good_quantity }}</td>
+                        <td>{{ good.weight}}</td>
                         <td>{{ good.height_m }}</td>
                         <td>{{ good.width_m }}</td>
                         <td>{{ good.length_m }}</td>
