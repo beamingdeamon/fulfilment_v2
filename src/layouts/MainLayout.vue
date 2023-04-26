@@ -68,6 +68,12 @@
                             <v-list-item-title>Накладные</v-list-item-title>
                         </v-list-item>
                     </router-link>
+                    
+                    <router-link to="/ozon">
+                        <v-list-item>
+                            <v-list-item-title>Накладные OZON</v-list-item-title>
+                        </v-list-item>
+                    </router-link>
 
                     <router-link to="/goods">
                         <v-list-item>
@@ -75,17 +81,18 @@
                         </v-list-item>
                     </router-link>
 
+                    <router-link to="/ready-requests">
+                        <v-list-item>
+                            <v-list-item-title>Oбработанные заявки</v-list-item-title>
+                        </v-list-item>
+                    </router-link>
+
                     <router-link to="/requests">
                         <v-list-item>
-                            <v-list-item-title>Заявки на отправку</v-list-item-title>
+                            <v-list-item-title>Не обработанные заявки</v-list-item-title>
                         </v-list-item>
                     </router-link>
-                    
-                    <router-link to="/ozon">
-                        <v-list-item>
-                            <v-list-item-title>Накладные OZON</v-list-item-title>
-                        </v-list-item>
-                    </router-link>
+
 
                     <router-link to="/returns">
                         <v-list-item>

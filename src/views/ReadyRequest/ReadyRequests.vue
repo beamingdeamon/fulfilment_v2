@@ -1,18 +1,6 @@
 <template>
     <div class="requests">
-            <h2 class="mt-5 ml-5">Список необработанных заявок</h2> <br>
-            <router-link to="/request/1">
-                <v-btn
-                    v-if="role == 'Client'"
-                    color="green"
-                    dark
-                    small
-                    class="mt-5 ml-5"
-                >
-                    Добавить заявку
-                </v-btn>
-            </router-link>
-            
+            <h2 class="mt-5 ml-5">Список обработанных заявок</h2>
             <v-simple-table>
                 <template v-slot:default>
                 <thead>
@@ -44,9 +32,6 @@
                         <th class="text-left">
                             Статус
                         </th>
-                        <th class="text-left">
-                            Страница заявки
-                        </th>
                         
                         
                     </tr>
@@ -57,22 +42,17 @@
                     v-for="(order, index) in ordersList"
                     :key="order.id"
                     class="menu-row"
-                    v-show="order.status != 'Не принимаются'"
+                    v-show="order.task"
                     >
                         <td>{{ index + 1 }}</td>
                         <td v-if="role == 'Admin_ff'">{{ order.seller.username}}</td>
-                        <td>{{ order.date }}</td>
+                        <td>{{ order.shipment_date }}</td>
                         <td>{{ order.address }}</td>
                         <td>{{ order.delivery_method}}</td>
                         <td v-if="role == 'Admin_ff'">{{ order.barcodes.lower_barcode}}</td>
                         <td v-if="role == 'Admin_ff'">{{ order.cell_number }}</td>
-                        <td>{{ order.status }}</td>
+                        <td>{{ order.status}}</td>
                         <td v-if="role == 'Admin_ff'">{{ order.package }}</td>
-                        <td>
-                            <router-link :to="{name: 'requests-view', params: {id: index}}">
-                                Перейти
-                            </router-link>
-                        </td>
                          <!-- <td class="download-wrapper">
                                 <a href="/test.pdf" download="PDF" ><img src="../../assets/download-icon.png" alt="" class="download-icon"></a>
                         </td> -->
@@ -96,7 +76,7 @@ export default {
     }),
     methods: {
         getOrderList(){
-            axios.get(`${BASE_URL}/ozon/unfulfilled/list/  `,
+            axios.get(`${BASE_URL}/api/rq/  `,
             {
                 headers:{
                     Authorization: 'Token ' + localStorage.getItem('usertoken')
