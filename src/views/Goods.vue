@@ -2,6 +2,17 @@
     <div class="goods">
         <div class="goods__inner">
             <h2 class="mt-5 ml-5">Товары</h2>
+            <router-link to="/goods-new/">
+                <v-btn
+                    v-if="role == 'Admin_ff'"
+                    color="green"
+                    dark
+                    small
+                    class="mt-5 ml-5"
+                >
+                Добавить Товар
+                </v-btn>
+            </router-link>
             <v-simple-table>
                 <template v-slot:default>
                 <thead>
@@ -73,7 +84,8 @@ import axios from 'axios'
 import { BASE_URL } from '../helpers/const'
 export default {
     data: () => ({
-        goodsList: []
+        goodsList: [],
+        role: "Client"
     }),
     methods:{
         getGoodsList(){
@@ -91,9 +103,20 @@ export default {
         },
         goToGood(id){
             this.$router.push('/goods/'+ id)
+        },
+        getRole(){
+            axios.get(`${BASE_URL}/users/` + localStorage.getItem('user_id') + "/role/",
+            {
+                headers:{
+                    Authorization: 'Token ' + localStorage.getItem('usertoken')
+                }
+            }).then((response) => {
+                this.role = response.data.role
+            })
         }
     },
     mounted(){
+        this.getRole()
         this.getGoodsList()
     }
 }

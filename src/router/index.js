@@ -64,6 +64,12 @@ const routes = [
     component: () => import('../views/Invoices.vue')
   },
   {
+    path: '/profile',
+    name: 'profile',
+    meta: {layout: 'main'},
+    component: () => import('../views/Profile.vue')
+  },
+  {
     path: '/ozon',
     name: 'ozon',
     meta: {layout: 'main'},
@@ -83,6 +89,12 @@ const routes = [
     component: () => import('../views/ViewInvoice.vue')
   },
   {
+    path: '/keys',
+    name: 'keys',
+    meta: {layout: 'main'},
+    component: () => import('../views/APIKeys.vue')
+  },
+  {
     path: '/goods',
     name: 'goods',
     meta: {layout: 'main'},
@@ -93,6 +105,12 @@ const routes = [
     name: 'goods-view',
     meta: {layout: 'main'},
     component: () => import('../views/GoodsAdd.vue')
+  },
+  {
+    path: '/goods-new/',
+    name: 'goods-add',
+    meta: {layout: 'main'},
+    component: () => import('../views/NewGood.vue')
   },
   {
     path: '/requests',

@@ -57,6 +57,12 @@
                         </v-list-item>
                     </router-link> -->
                     
+                    <!-- <router-link to="/profile">
+                        <v-list-item>
+                            <v-list-item-title>Профиль</v-list-item-title>
+                        </v-list-item>
+                    </router-link> -->
+
                     <router-link to="/invoices">
                         <v-list-item>
                             <v-list-item-title>Накладные</v-list-item-title>
@@ -84,6 +90,12 @@
                     <router-link to="/returns">
                         <v-list-item>
                             <v-list-item-title>Возврат и брак</v-list-item-title>
+                        </v-list-item>
+                    </router-link>
+
+                    <router-link to="/keys">
+                        <v-list-item>
+                            <v-list-item-title>API ключи</v-list-item-title>
                         </v-list-item>
                     </router-link>
 

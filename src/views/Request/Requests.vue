@@ -27,13 +27,7 @@
                             Дата
                         </th>
                         <th class="text-left">
-                            Получатель
-                        </th>
-                        <th class="text-left">
                             Адрес доставки
-                        </th>
-                        <th class="text-left">
-                            Контакты
                         </th>
                         <th class="text-left">
                             Тип доставки 
@@ -71,13 +65,11 @@
                     class="menu-row"
                     >
                         <td>{{ index + 1 }}</td>
-                        <td v-if="role == 'Admin_ff'">{{ order.organization }}</td>
+                        <td v-if="role == 'Admin_ff'">{{ order.seller.username}}</td>
                         <td>{{ order.date }}</td>
-                        <td>{{ order.recipient }}</td>
-                        <td>{{ order.shipping_address }}</td>
-                        <td>{{ order.contacts }}</td>
-                        <td>{{ order.shipping_type }}</td>
-                        <td v-if="role == 'Admin_ff'">{{ order.bar_code }}</td>
+                        <td>{{ order.address }}</td>
+                        <td>{{ order.delivery_method}}</td>
+                        <td v-if="role == 'Admin_ff'">{{ order.barcodes.lower_barcode}}</td>
                         <td v-if="role == 'Admin_ff'">{{ order.cell_number }}</td>
                         <td>{{ order.status }}</td>
                         <td v-if="role == 'Admin_ff'">{{ order.package }}</td>
@@ -115,7 +107,7 @@ export default {
     }),
     methods: {
         getOrderList(){
-            axios.get(`${BASE_URL}/api/orders/list/`,
+            axios.get(`${BASE_URL}/ozon/unfulfilled/list/  `,
             {
                 headers:{
                     Authorization: 'Token ' + localStorage.getItem('usertoken')
