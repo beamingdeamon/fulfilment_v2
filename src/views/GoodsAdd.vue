@@ -35,7 +35,10 @@
             </v-container>
             <div class="cont">
                 <h1>Изменение товара</h1>
-                <button @click="changeGoods">Сохранить</button>
+                <div class="buttons">
+                    <button class="save" @click="changeGoods">Сохранить</button>
+                    <button class="delete" @click="deleteGood">Удалить</button>
+                </div>
             </div>
             
             <div class = "wrapper">
@@ -97,8 +100,20 @@ export default {
         responseChange : {status: 100, message : null}
     }),
     methods:{
+        deleteGood(){
+            axios.delete(`${BASE_URL}/api/goods/` + this.$route.params.id ,
+            {
+                headers:{
+                    Authorization: 'Token ' + localStorage.getItem('usertoken')
+                }
+            }).then((response) => {
+               
+                this.$router.push("/goods")
+            })
+        },
         closePopup(){
             document.getElementById('popup').style.display = "none"
+            this.$router.push("/goods")
         },
         getGoodsItem(){
             axios.get(`${BASE_URL}/api/goods/` + this.$route.params.id ,
@@ -122,7 +137,8 @@ export default {
                 "height_m": this.goodsItem.height_m,
                 "width_m": this.goodsItem.width_m,
                 "length_m": this.goodsItem.length_m,
-                "capacity_m3": this.goodsItem.capacity_m3
+                "capacity_m3": this.goodsItem.capacity_m3,
+                "seller" : this.goodsItem.seller
             },
             {
                 headers:{
@@ -198,14 +214,22 @@ export default {
     h1
         margin-left: 12vw
         margin-bottom: 2vh
-    button
-        margin-right: 18vw
+    .save
+        margin-right: 2vw
         color: white
         height: 6vh
         width: 10vw
         font-size: 1.2rem
         border-radius: 10px
         background-color: #439400
+    .delete
+        margin-right: 18vw
+        color: white
+        height: 6vh
+        width: 10vw
+        font-size: 1.2rem
+        border-radius: 10px
+        background-color: red
 .wrapper
     width: 100vw
     display: flex

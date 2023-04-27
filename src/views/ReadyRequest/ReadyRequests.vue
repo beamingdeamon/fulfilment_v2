@@ -32,6 +32,9 @@
                         <th class="text-left">
                             Статус
                         </th>
+                        <th class="text-left">
+                            Страница заявки
+                        </th>
                         
                         
                     </tr>
@@ -56,6 +59,11 @@
                          <!-- <td class="download-wrapper">
                                 <a href="/test.pdf" download="PDF" ><img src="../../assets/download-icon.png" alt="" class="download-icon"></a>
                         </td> -->
+                        <td>
+                            <router-link :to="{name: 'ready-requests-view', params: {id: index}}">
+                                Перейти
+                            </router-link>
+                        </td>
                     </tr>
                 </tbody>
                 </template>

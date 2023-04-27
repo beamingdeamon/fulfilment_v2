@@ -154,8 +154,13 @@ export default {
                 }
             }).then((response) => {
                
-                this.username = response.data[0].username,
-                localStorage.setItem('user_id', response.data[0].id)
+                this.username = localStorage.getItem("username")
+                for (const item of response.data) {
+                    if(item.username ===  localStorage.getItem("username")){
+                        console.log(this.username)
+                        localStorage.setItem('user_id', item.id)
+                    }
+                }
                 this.getUserRole()
             })
         },

@@ -125,6 +125,13 @@ const routes = [
     component: () => import('../views/ReadyRequest/ReadyRequests.vue')
   },
   {
+    path: '/ready-requests/view/:id',
+    name: 'ready-requests-view',
+    params: true,
+    meta: {layout: 'main'},
+    component: () => import('../views/ReadyRequest/ReadyRequestView.vue')
+  },
+  {
     path: '/requests/view/:id',
     name: 'requests-view',
     params: true,

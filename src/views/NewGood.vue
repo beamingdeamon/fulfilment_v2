@@ -18,7 +18,7 @@
 
                                 <v-select
                                     clearable
-                                    v-model="user_fullname"
+                                    v-model="username"
                                     label="Выберите пользователя"
                                     :items="users"
                                     ></v-select>
@@ -28,7 +28,7 @@
                                 class="form__button" block>
                                     Сохранить
                                 </v-btn>
-                                <router-link to="/invoices">
+                                <router-link to= "/goods">
                                     <v-btn
                                         class="mt-3"
                                         
@@ -59,8 +59,9 @@ export default {
     data: () => ({
         number: '',
         users: [],
-        user_fullname: "",
-        users_list:[]
+        username: "",
+        users_list:[],
+        response: 0
     }),
     methods:{
         getUsers(){
@@ -71,7 +72,7 @@ export default {
                 }
             }).then((response) => {
                 for (const item of response.data) {
-                    this.users.push(item.full_name)
+                    this.users.push(item.username)
                 }
                 this.users_list = response.data;
             })
@@ -79,22 +80,24 @@ export default {
         saveGood(){
             let user_id;
             for (const item of this.users_list) {
-                if(item.full_name === this.user_fullname){
+                if(item.username === this.username){
                     user_id = item.id
                 }
             }
             axios.post(`${BASE_URL}/api/goods/`,{
                  "vendor_code": this.number,
-                 "user_id" : user_id
+                 "seller" : user_id
             },
             {
                 headers:{
                     Authorization: 'Token ' + localStorage.getItem('usertoken')
                 },
             }).then((response) => {
-               this.router.push("/goods")
+                console.log(response)
+                if(response.status === 201){
+                    this.$router.push("/goods")
+                }
             })
-            console.log(user_id)
         }
     },
    mounted(){

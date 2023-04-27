@@ -85,7 +85,7 @@ import { BASE_URL } from '../helpers/const'
 export default {
     data: () => ({
         goodsList: [],
-        role: "Client"
+        role: ""
     }),
     methods:{
         getGoodsList(){
@@ -105,14 +105,7 @@ export default {
             this.$router.push('/goods/'+ id)
         },
         getRole(){
-            axios.get(`${BASE_URL}/users/` + localStorage.getItem('user_id') + "/role/",
-            {
-                headers:{
-                    Authorization: 'Token ' + localStorage.getItem('usertoken')
-                }
-            }).then((response) => {
-                this.role = response.data.role
-            })
+           this.role = localStorage.getItem("user_role")
         }
     },
     mounted(){

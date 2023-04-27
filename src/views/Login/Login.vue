@@ -83,6 +83,7 @@ export default {
                 }).then((response) => {
                     
                     localStorage.setItem('usertoken', response.data.auth_token)
+                    localStorage.setItem('username', this.username)
                     this.$router.push('/invoices')
                 }).catch((error) => {
                     
