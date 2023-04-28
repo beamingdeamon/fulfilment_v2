@@ -20,6 +20,9 @@
                         <th class="text-left">
                             №
                         </th>
+                        <th v-if="role === 'Admin_ff'" class="text-left">
+                            Организация
+                        </th>
                         <th class="text-left">
                             Наименование
                         </th>
@@ -60,6 +63,7 @@
                     class = "goods-list"
                     >
                         <td>{{ index + 1 }}</td>
+                        <td>{{good.seller.username}} </td>
                         
                         <td>{{ good.title }}</td>
                         <td>{{ good.vendor_code }}</td>

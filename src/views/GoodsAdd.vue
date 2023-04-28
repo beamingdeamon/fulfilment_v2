@@ -61,7 +61,7 @@
                     </div>
                     <div class = "input-item">
                         <h2 class = "input-title">Кол-во</h2>
-                        <input type="number" v-model="goodsItem.good_quantity" v-bind:placeholder = goodsItem.good_quantity>
+                        <input type="number" @change="triggerCapacity" v-model="goodsItem.good_quantity" v-bind:placeholder = goodsItem.good_quantity>
                     </div>
                     <div class = "input-item">
                         <h2 class = "input-title">Вес</h2>
@@ -69,19 +69,19 @@
                     </div>
                     <div class = "input-item">
                         <h2 class = "input-title">Высота, м</h2>
-                        <input type="number" v-model="goodsItem.height_m" v-bind:placeholder = goodsItem.height_m>
+                        <input type="number" @change="triggerCapacity" v-model="goodsItem.height_m" v-bind:placeholder = goodsItem.height_m>
                     </div>
                     <div class = "input-item">
                         <h2 class = "input-title">Ширина, м</h2>
-                        <input type="number" v-model="goodsItem.width_m" v-bind:placeholder = goodsItem.width_m>
+                        <input type="number" @change="triggerCapacity" v-model="goodsItem.width_m" v-bind:placeholder = goodsItem.width_m>
                     </div>
                     <div class = "input-item">
                         <h2 class = "input-title">Длина, м</h2>
-                        <input type="number" v-model="goodsItem.length_m" v-bind:placeholder = goodsItem.length_m>
+                        <input type="number" @change="triggerCapacity" v-model="goodsItem.length_m" v-bind:placeholder = goodsItem.length_m>
                     </div>
                     <div class = "input-item">
                         <h2 class = "input-title">Объем, м3</h2>
-                        <input type="number" v-model="goodsItem.capacity_m3" v-bind:placeholder = goodsItem.capacity_m3>
+                        <input type="number" v-model="capacity_m3" v-bind:placeholder = capacity_m3 disabled>
                     </div>
                 </form>
             </div>
@@ -97,9 +97,14 @@ import { BASE_URL } from '../helpers/const'
 export default {
     data: () => ({
         goodsItem: {},
+        capacity_m3: 0,
         responseChange : {status: 100, message : null}
     }),
     methods:{
+        triggerCapacity(){
+            this.capacity_m3 = this.goodsItem.height_m * this.goodsItem.width_m * this.goodsItem.length_m * this.goodsItem.good_quantity
+            console.log(this.capacity_m3)
+        },
         deleteGood(){
             axios.delete(`${BASE_URL}/api/goods/` + this.$route.params.id ,
             {
@@ -124,6 +129,7 @@ export default {
             }).then((response) => {
                
                 this.goodsItem = response.data
+                this.capacity_m3 = this.goodsItem.height_m * this.goodsItem.width_m * this.goodsItem.length_m * this.goodsItem.good_quantity
             })
         },
         changeGoods(){
@@ -137,7 +143,7 @@ export default {
                 "height_m": this.goodsItem.height_m,
                 "width_m": this.goodsItem.width_m,
                 "length_m": this.goodsItem.length_m,
-                "capacity_m3": this.goodsItem.capacity_m3,
+                "capacity_m3": this.capacity_m3,
                 "seller" : this.goodsItem.seller
             },
             {
