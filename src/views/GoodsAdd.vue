@@ -103,6 +103,7 @@ export default {
     methods:{
         triggerCapacity(){
             this.capacity_m3 = this.goodsItem.height_m * this.goodsItem.width_m * this.goodsItem.length_m * this.goodsItem.good_quantity
+            this.capacity_m3 = this.capacity_m3.toFixed(3)
             console.log(this.capacity_m3)
         },
         deleteGood(){

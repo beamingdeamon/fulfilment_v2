@@ -1,18 +1,34 @@
 <template>
     <div class="goods">
-        <div class="goods__inner">
-            <h2 class="mt-5 ml-5">Товары</h2>
-            <router-link to="/goods-new/">
-                <v-btn
-                    v-if="role == 'Admin_ff'"
-                    color="green"
-                    dark
-                    small
-                    class="mt-5 ml-5"
-                >
-                Добавить Товар
-                </v-btn>
-            </router-link>
+         <div class="head-container">
+                <h2 class="mt-5 ml-5">Товары</h2>
+                <form class="search-container">
+                    <div class="input-container">
+                        <v-text-field clearable label="Поиск" variant="solo-filled" v-model="search_input"></v-text-field>
+                        <button @click="search" class="search-button">Найти</button>
+                    </div>
+
+                        <h4 v-if="isRequest">Пожалуйста выберите тип поиска</h4>
+                    <form class="checkbocks-wrapper">
+                        <v-checkbox @click="isChecked" v-model="bar_code_search" name="check" class="check" label="по артикулу"></v-checkbox>
+                        <v-checkbox @click="isChecked" v-model="name_search" name="check" class="check" label="по названию"></v-checkbox>
+
+                    </form>
+                </form>
+            </div>
+                <router-link to="/goods-new/">
+                    <v-btn
+                        v-if="role == 'Admin_ff'"
+                        color="green"
+                        dark
+                        small
+                        class="mt-5 ml-5"
+                    >
+                    Добавить Товар
+                    </v-btn>
+                </router-link>
+                
+        <div class="goods__inner"> 
             <v-simple-table>
                 <template v-slot:default>
                 <thead>
@@ -89,11 +105,71 @@ import { BASE_URL } from '../helpers/const'
 export default {
     data: () => ({
         goodsList: [],
-        role: ""
+        role: "",
+        bar_code_search: false,
+        name_search: false,
+        currency_choice: "",
+        search_input: "",
+        isRequest: false
     }),
     methods:{
+        search(){
+            if(this.search_input == null){
+                this.search_input = ""
+            }
+            if(this.name_search){
+                 axios.get(`${BASE_URL}/api/goods/list/?title=${this.search_input}`,
+                {
+                    headers:{
+                        Authorization: 'Token ' + localStorage.getItem('usertoken')
+                    }
+                }).then((response) => {
+                window.localStorage.removeItem('goodsList')
+                window.localStorage.setItem('goodsList', response.data)
+                console.log(response.data[0])
+                    this.goodsList = response.data
+                })
+                this.isRequest = false
+            }else if(this.bar_code_search){
+                axios.get(`${BASE_URL}/api/goods/list/?vendor_code=${this.search_input}`,
+                {
+                    headers:{
+                        Authorization: 'Token ' + localStorage.getItem('usertoken')
+                    }
+                }).then((response) => {
+                window.localStorage.removeItem('goodsList')
+                window.localStorage.setItem('goodsList', response.data)
+                console.log(response.data[0])
+                    this.goodsList = response.data
+                })
+                this.isRequest = false
+            }else{
+                this.isRequest = true
+            }
+        },
+        isChecked() {
+            if(this.bar_code_search === this.name_search){
+                console.log(1)
+                if(this.currency_choice === "bar_code"){
+                    this.bar_code_search = false
+                    console.log(2)
+                }else if(this.currency_choice === "name"){
+                    this.name_search = false
+                    console.log(3)
+                }
+            }else if(this.bar_code_search != this.name_search){
+                console.log(4)
+                if(this.bar_code_search){
+                    console.log(5)
+                    this.currency_choice ="bar_code"
+                }else if(this.name_search){
+                    console.log(6)
+                    this.currency_choice = "name"
+                }
+            }
+        },
         getGoodsList(){
-            axios.get(`${BASE_URL}/api/goods`,
+            axios.get(`${BASE_URL}/api/goods/list`,
             {
                 headers:{
                     Authorization: 'Token ' + localStorage.getItem('usertoken')
@@ -119,6 +195,33 @@ export default {
 }
 </script>
 <style lang="sass" scoped>
+
+.input-container
+    margin-left: 5vw
+    height: 8vh
+    display: flex
+    flex-direction: row
+    width: 40vw
+    .input
+        width: 25vw
+    .search-button
+        margin-top: 10px
+        height: 3rem
+        width: 8vw
+        background-color: gray
+        color: white
+        border-radius: 10px
+.search-container
+    h4
+        margin-left: 5vw
+        color: red
+.checkbocks-wrapper
+    display: flex
+    margin-left: 3vw
+    flex-direction: row
+    .check
+        margin-left: 2vw
+        font-size: 0.5rem
 .goods-list
     cursor: pointer
 </style>
