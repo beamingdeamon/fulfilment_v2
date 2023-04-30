@@ -107,7 +107,7 @@ export default {
             console.log(this.capacity_m3)
         },
         deleteGood(){
-            axios.delete(`${BASE_URL}/api/goods/` + this.$route.params.id ,
+            axios.delete(`${BASE_URL}/goods/` + this.$route.params.id ,
             {
                 headers:{
                     Authorization: 'Token ' + localStorage.getItem('usertoken')
@@ -122,7 +122,7 @@ export default {
             this.$router.push("/goods")
         },
         getGoodsItem(){
-            axios.get(`${BASE_URL}/api/goods/` + this.$route.params.id ,
+            axios.get(`${BASE_URL}/goods/` + this.$route.params.id ,
             {
                 headers:{
                     Authorization: 'Token ' + localStorage.getItem('usertoken')
@@ -134,7 +134,7 @@ export default {
             })
         },
         changeGoods(){
-             axios.put(`${BASE_URL}/api/goods/` + this.$route.params.id + "/",{
+             axios.put(`${BASE_URL}/goods/` + this.$route.params.id + "/",{
                  "title": this.goodsItem.title,
                  "vendor_code": this.goodsItem.vendor_code,
                 "tax": this.goodsItem.tax,

@@ -84,7 +84,7 @@ export default {
                     user_id = item.id
                 }
             }
-            axios.post(`${BASE_URL}/api/goods/`,{
+            axios.post(`${BASE_URL}/goods/`,{
                  "vendor_code": this.number,
                  "seller" : user_id
             },

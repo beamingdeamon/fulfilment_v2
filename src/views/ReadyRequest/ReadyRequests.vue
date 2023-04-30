@@ -84,7 +84,7 @@ export default {
     }),
     methods: {
         getOrderList(){
-            axios.get(`${BASE_URL}/api/rq/  `,
+            axios.get(`${BASE_URL}/rq/  `,
             {
                 headers:{
                     Authorization: 'Token ' + localStorage.getItem('usertoken')

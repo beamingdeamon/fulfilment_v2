@@ -105,7 +105,7 @@ export default {
         submitHandler(){
             this.$v.$touch()
             if(!this.$v.$invalid){
-                axios.post(`${BASE_URL}/api/invoices/`,
+                axios.post(`${BASE_URL}/invoices/`,
                 {
                     number: this.number,
                     date: this.date

@@ -96,7 +96,7 @@ import { BASE_URL } from '../helpers/const'
         //     }
         // },
         getOrganizationInvoices(){
-            axios.get(`${BASE_URL}/api/organization/invoices/`,
+            axios.get(`${BASE_URL}/organization/invoices/`,
             {
                 headers:{
                     Authorization: 'Token ' + localStorage.getItem('usertoken')
@@ -120,7 +120,7 @@ import { BASE_URL } from '../helpers/const'
         //     })
         // },
         getOrganization(){
-            axios.get(`${BASE_URL}/api/organizations/1`,
+            axios.get(`${BASE_URL}/organizations/1`,
             {
                 headers:{
                     Authorization: 'Token ' + localStorage.getItem('usertoken')

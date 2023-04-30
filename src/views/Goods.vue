@@ -118,7 +118,7 @@ export default {
                 this.search_input = ""
             }
             if(this.name_search){
-                 axios.get(`${BASE_URL}/api/goods/list/?title=${this.search_input}`,
+                 axios.get(`${BASE_URL}/goods/list/?title=${this.search_input}`,
                 {
                     headers:{
                         Authorization: 'Token ' + localStorage.getItem('usertoken')
@@ -131,7 +131,7 @@ export default {
                 })
                 this.isRequest = false
             }else if(this.bar_code_search){
-                axios.get(`${BASE_URL}/api/goods/list/?vendor_code=${this.search_input}`,
+                axios.get(`${BASE_URL}/goods/list/?vendor_code=${this.search_input}`,
                 {
                     headers:{
                         Authorization: 'Token ' + localStorage.getItem('usertoken')
@@ -169,7 +169,7 @@ export default {
             }
         },
         getGoodsList(){
-            axios.get(`${BASE_URL}/api/goods/list`,
+            axios.get(`${BASE_URL}/goods/list`,
             {
                 headers:{
                     Authorization: 'Token ' + localStorage.getItem('usertoken')

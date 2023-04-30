@@ -156,6 +156,12 @@
             @click="productShip"
             v-show="request.status === 'Ожидает отправки'"
             >Отправить товар</v-btn>
+            <v-btn
+            
+            class="mt-3 ml-5 white--text" color="green"
+            v-show="request.status === 'Ожидает отгрузки'"
+            @click="downloadPDF"
+            >Скачать маркировки</v-btn>
         </v-container>
         <h2 class="products-head">Товары</h2>
         <v-simple-table class="table">
@@ -207,6 +213,21 @@ export default {
         request: {},
     }),
     methods:{
+        downloadPDF(){
+            axios.get(`${BASE_URL}/ozon/act/package-label/ `,{
+                "posting_number": this.request.posting_number
+
+            },
+            {
+                headers:{
+                    Authorization: 'Token ' + localStorage.getItem('usertoken')
+                }
+            }).then((response) => {
+                
+                console.log(response)
+            })
+            
+        },
         actCreate(){
              axios.post(`${BASE_URL}/ozon/fbs/ship/`,{
                     "user": this.request.seller.id,

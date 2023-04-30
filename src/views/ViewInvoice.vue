@@ -165,7 +165,7 @@ export default {
             formData.append('file', this.file);
             formData.append('invoice', localStorage.getItem('invoiceId'))
             
-            axios.post(`${BASE_URL}/api/goods/download/`,
+            axios.post(`${BASE_URL}/goods/download/`,
             
                 formData,
             
@@ -200,7 +200,7 @@ export default {
             this.error = ''
         },
          async getInvoiceGoods(){
-           await axios.get(`${BASE_URL}/api/organization/invoice/` + localStorage.getItem('invoiceId'),
+           await axios.get(`${BASE_URL}/organization/invoice/` + localStorage.getItem('invoiceId'),
             {
                 headers:{
                     Authorization: 'Token ' + localStorage.getItem('usertoken')
