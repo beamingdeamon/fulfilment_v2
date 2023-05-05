@@ -1,6 +1,36 @@
 <template>
     <div class="requests">
             <h2 class="mt-5 ml-5">Список обработанных заявок</h2>
+            <div class="buttons-wrapper">
+                <v-btn
+                    color="green"
+                    dark
+                    small
+                    class="mt-5 ml-5"
+                    @click="downloadDoc"
+                >
+                    Скачать документацию
+                </v-btn>
+                <v-btn
+                    color="green"
+                    dark
+                    small
+                    class="mt-5 ml-5"
+                    @click="downloadMarcs"
+                >
+                    Скачать маркировки
+                </v-btn>
+                <v-btn
+                    color="green"
+                    dark
+                    small
+                    class="mt-5 ml-5"
+                    @click="acceptAll"
+                >
+                    Собрать все
+                </v-btn>
+            </div>
+                
             <v-simple-table>
                 <template v-slot:default>
                 <thead>
@@ -83,6 +113,45 @@ export default {
         role: ''
     }),
     methods: {
+        downloadDoc(){
+            axios.post(`${BASE_URL}/rq/  `,{
+                ordersList
+            },
+            {
+                headers:{
+                    Authorization: 'Token ' + localStorage.getItem('usertoken')
+                }
+            }).then((response) => {
+                
+                console.log(response)
+            })
+        },
+        downloadMarcs(){
+            axios.post(`${BASE_URL}/rq/  `,{
+                ordersList
+            },
+            {
+                headers:{
+                    Authorization: 'Token ' + localStorage.getItem('usertoken')
+                }
+            }).then((response) => {
+                
+                console.log(response)
+            })
+        },
+        acceptAll(){
+            axios.post(`${BASE_URL}/rq/  `,{
+                ordersList
+            },
+            {
+                headers:{
+                    Authorization: 'Token ' + localStorage.getItem('usertoken')
+                }
+            }).then((response) => {
+                
+                console.log(response)
+            })
+        },
         getOrderList(){
             axios.get(`${BASE_URL}/rq/  `,
             {

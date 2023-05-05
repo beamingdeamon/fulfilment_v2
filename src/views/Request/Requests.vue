@@ -12,6 +12,15 @@
                     Добавить заявку
                 </v-btn>
             </router-link>
+            <v-btn
+                color="green"
+                dark
+                small
+                class="mt-5 ml-5"
+                @click="acceptRequests"
+            >
+                Принять в обработку
+            </v-btn>
             
             <v-simple-table>
                 <template v-slot:default>
@@ -95,6 +104,19 @@ export default {
         role: ''
     }),
     methods: {
+        acceptRequests(){
+             axios.post(`${BASE_URL}/ozon/unfulfilled/list/  `,{
+                ordersList
+             },
+            {
+                headers:{
+                    Authorization: 'Token ' + localStorage.getItem('usertoken')
+                }
+            }).then((response) => {
+                
+                console.log(response)
+            })
+        },
         getOrderList(){
             axios.get(`${BASE_URL}/ozon/unfulfilled/list/  `,
             {
