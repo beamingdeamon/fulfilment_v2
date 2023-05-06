@@ -44,44 +44,102 @@
             <div class = "wrapper">
                 <form>
                     <div class = "input-item">
-                        <h2 class = "input-title">Наименование</h2>
-                        <input type="text" v-model="goodsItem.title" v-bind:placeholder = goodsItem.title>
+                        <v-text-field 
+                            v-model="goodsItem.title" 
+                            class="input" 
+                            label= "Наименование" 
+                            placeholder="Название"
+                            :error-messages="numberErrors"
+                        />
                     </div>
                     <div class = "input-item">
-                        <h2 class = "input-title">Артикул</h2>
-                        <input type="number" v-model="goodsItem.vendor_code" v-bind:placeholder = goodsItem.vendor_code>
+                        
+                        <v-text-field 
+                            v-model="goodsItem.vendor_code" 
+                            class="input" 
+                            label= "Баркод" 
+                            placeholder="1234567890123"
+                            :error-messages="numberErrors"
+                        />
                     </div>
                     <div class = "input-item">
-                        <h2 class = "input-title">Стоимость</h2>
-                        <input type="number" v-model="goodsItem.tax" v-bind:placeholder = goodsItem.tax>
+                        <v-text-field 
+                            v-model="goodsItem.tax" 
+                            class="input" 
+                            label= "Стоимость" 
+                            placeholder="24023"
+                            :error-messages="numberErrors"
+                        />
                     </div>
                     <div class = "input-item">
-                        <h2 class = "input-title">Штрихкод</h2>
-                        <input type="text" v-model="goodsItem.bar_code" v-bind:placeholder = goodsItem.bar_code>
+                        <v-text-field 
+                            v-model="goodsItem.bar_code" 
+                            class="input" 
+                            label= "Штрихкод"
+                            placeholder="1234567890123"
+                            :error-messages="numberErrors"
+                            :rules="bar_code_rule"
+                        />
                     </div>
                     <div class = "input-item">
-                        <h2 class = "input-title">Кол-во</h2>
-                        <input type="number" @change="triggerCapacity" v-model="goodsItem.good_quantity" v-bind:placeholder = goodsItem.good_quantity>
+                        <v-text-field 
+                            v-model="goodsItem.good_quantity" 
+                            class="input" 
+                            label= "Кол-во" 
+                            placeholder="1"
+                            :error-messages="numberErrors"
+                            @change="triggerCapacity"
+                        />
                     </div>
                     <div class = "input-item">
-                        <h2 class = "input-title">Вес</h2>
-                        <input type="number" v-model="goodsItem.weight" v-bind:placeholder = goodsItem.weight>
+                        <v-text-field 
+                            v-model="goodsItem.weight" 
+                            class="input" 
+                            label= "Вес" 
+                            placeholder="1"
+                            :error-messages="numberErrors"
+                        />
                     </div>
                     <div class = "input-item">
-                        <h2 class = "input-title">Высота, м</h2>
-                        <input type="number" @change="triggerCapacity" v-model="goodsItem.height_m" v-bind:placeholder = goodsItem.height_m>
+                        <v-text-field 
+                            v-model="goodsItem.height_m" 
+                            class="input" 
+                            label= "Высота, см" 
+                            placeholder="1"
+                            :error-messages="numberErrors"
+                            @change="triggerCapacity"
+                        />
                     </div>
                     <div class = "input-item">
-                        <h2 class = "input-title">Ширина, м</h2>
-                        <input type="number" @change="triggerCapacity" v-model="goodsItem.width_m" v-bind:placeholder = goodsItem.width_m>
+                        <v-text-field 
+                            v-model="goodsItem.width_m" 
+                            class="input" 
+                            label= "Ширина, см" 
+                            placeholder="1"
+                            :error-messages="numberErrors"
+                            @change="triggerCapacity"
+                        />
                     </div>
                     <div class = "input-item">
-                        <h2 class = "input-title">Длина, м</h2>
-                        <input type="number" @change="triggerCapacity" v-model="goodsItem.length_m" v-bind:placeholder = goodsItem.length_m>
+                        <v-text-field 
+                            v-model="goodsItem.length_m" 
+                            class="input" 
+                            label= "Длина, см" 
+                            placeholder="1"
+                            :error-messages="numberErrors"
+                            @change="triggerCapacity"
+                        />
                     </div>
                     <div class = "input-item">
-                        <h2 class = "input-title">Объем, м3</h2>
-                        <input type="number" v-model="capacity_m3" v-bind:placeholder = capacity_m3 disabled>
+                        <v-text-field 
+                            v-model="capacity_m3" 
+                            disabled
+                            class="input" 
+                            label= "Объем, м3" 
+                            placeholder="1"
+                            :error-messages="numberErrors"
+                            @change="triggerCapacity"
+                        />
                     </div>
                 </form>
             </div>
@@ -98,11 +156,12 @@ export default {
     data: () => ({
         goodsItem: {},
         capacity_m3: 0,
-        responseChange : {status: 100, message : null}
+        responseChange : {status: 100, message : null},
+        bar_code_rule : []
     }),
     methods:{
         triggerCapacity(){
-            this.capacity_m3 = this.goodsItem.height_m * this.goodsItem.width_m * this.goodsItem.length_m * this.goodsItem.good_quantity
+            this.capacity_m3 = ((this.goodsItem.height_m * this.goodsItem.width_m * this.goodsItem.length_m) / 1000000) * this.goodsItem.good_quantity
             this.capacity_m3 = this.capacity_m3.toFixed(3)
             console.log(this.capacity_m3)
         },
@@ -130,33 +189,40 @@ export default {
             }).then((response) => {
                
                 this.goodsItem = response.data
-                this.capacity_m3 = this.goodsItem.height_m * this.goodsItem.width_m * this.goodsItem.length_m * this.goodsItem.good_quantity
+                this.capacity_m3 = ((this.goodsItem.height_m * this.goodsItem.width_m * this.goodsItem.length_m) / 100) * this.goodsItem.good_quantity
             })
         },
         changeGoods(){
-             axios.put(`${BASE_URL}/goods/` + this.$route.params.id + "/",{
-                 "title": this.goodsItem.title,
-                 "vendor_code": this.goodsItem.vendor_code,
-                "tax": this.goodsItem.tax,
-                "bar_code": this.goodsItem.bar_code,
-                "good_quantity": this.goodsItem.good_quantity,
-                "weight": this.goodsItem.weight,
-                "height_m": this.goodsItem.height_m,
-                "width_m": this.goodsItem.width_m,
-                "length_m": this.goodsItem.length_m,
-                "capacity_m3": this.capacity_m3,
-                "seller" : this.goodsItem.seller
-            },
-            {
-                headers:{
-                    Authorization: 'Token ' + localStorage.getItem('usertoken')
+            if(this.goodsItem.bar_code != "" && this.goodsItem.bar_code?.length < 13){
+                alert("У штрихкода должно быть минимум 13 символов!")
+            }else if(this.goodsItem.bar_code != "" && this.goodsItem.bar_code?.length >14){
+                alert("У штрихкода должно быть максимум 14 символов!")
+            }
+            else{
+                axios.put(`${BASE_URL}/goods/` + this.$route.params.id + "/",{
+                    "title": this.goodsItem.title,
+                    "vendor_code": this.goodsItem.vendor_code,
+                    "tax": this.goodsItem.tax,
+                    "bar_code": this.goodsItem.bar_code,
+                    "good_quantity": this.goodsItem.good_quantity,
+                    "weight": this.goodsItem.weight,
+                    "height_m": this.goodsItem.height_m,
+                    "width_m": this.goodsItem.width_m,
+                    "length_m": this.goodsItem.length_m,
+                    "capacity_m3": this.capacity_m3,
+                    "seller" : this.goodsItem.seller
                 },
-            }).then((response) => {
-               this.responseChange = response
-            }).catch((error) => {
-                this.responseChange = error.response.status;
-            }); 
-               document.getElementById('popup').style.display = "flex"
+                {
+                    headers:{
+                        Authorization: 'Token ' + localStorage.getItem('usertoken')
+                    },
+                }).then((response) => {
+                this.responseChange = response
+                }).catch((error) => {
+                    this.responseChange = error.response.status;
+                }); 
+                document.getElementById('popup').style.display = "flex"
+            }
         }
     },
     mounted(){

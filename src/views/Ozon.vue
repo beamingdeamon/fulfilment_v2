@@ -2,7 +2,7 @@
     <div class="invoices">
         <div class="invoices__inner">
             <h2 class="mt-5 ml-5">Накладные</h2>
-            <router-link to="/invoices/add">
+            <!-- <router-link to="/invoices/add">
                 <v-btn
                     v-if="role == 'Client'"
                     color="green"
@@ -12,7 +12,7 @@
                 >
                 Добавить накладную
                 </v-btn>
-            </router-link>
+            </router-link> -->
             
             <v-simple-table >
                 <template v-slot:default>
@@ -145,18 +145,6 @@ import { BASE_URL } from '../helpers/const'
                 this.getUserRole()
             })
         },
-        getUserRole(){
-            axios.get(`${BASE_URL}/users/`+ localStorage.getItem('user_id') +'/role/',
-            {
-                headers:{
-                    Authorization: 'Token ' + localStorage.getItem('usertoken')
-                }
-            }).then((response) => {
-                
-                this.role = response.data.role
-                localStorage.setItem('user_role', response.data.role)
-            })
-        }
     },
     mounted(){
         this.getUserName()

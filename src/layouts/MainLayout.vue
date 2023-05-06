@@ -83,7 +83,7 @@
 
                     <router-link to="/ready-requests">
                         <v-list-item v-if ="role=='Admin_ff'">
-                            <v-list-item-title>Oбработанные заявки</v-list-item-title>
+                            <v-list-item-title>Обрабатываемые заявки</v-list-item-title>
                         </v-list-item>
                     </router-link>
 

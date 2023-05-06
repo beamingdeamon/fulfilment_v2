@@ -11,8 +11,8 @@
                                 <v-text-field 
                                 v-model="number" 
                                 class="input" 
-                                label="Введите артикул" 
-                                placeholder="012354"
+                                label="Введите Баркод" 
+                                placeholder="1234567890123"
                                 :error-messages="numberErrors"
                                 />
 
@@ -61,7 +61,7 @@ export default {
         users: [],
         username: "",
         users_list:[],
-        response: 0
+        response: 0,
     }),
     methods:{
         getUsers(){

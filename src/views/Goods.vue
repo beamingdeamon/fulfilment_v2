@@ -43,7 +43,7 @@
                             Наименование
                         </th>
                         <th class="text-left">
-                            Артикул
+                            Баркод
                         </th>
                         <th class="text-left">
                             Стоимость
@@ -58,13 +58,13 @@
                             Вес 
                         </th>
                         <th class="text-left">
-                            Высота, м
+                            Высота, cм
                         </th>
                         <th class="text-left">
-                            Ширина, м
+                            Ширина, cм
                         </th>
                         <th class="text-left">
-                            Длина, м
+                            Длина, cм
                         </th>
                         <th class="text-left">
                             Объем, м3
