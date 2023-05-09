@@ -33,7 +33,7 @@ export default {
     data: () => ({
         ozon_api_key : "",
         ozon_client_id : "",
-        kaspi_key: ""
+        kaspi_key: "",
     }),
     methods : {
         saveOzon(){
@@ -59,8 +59,31 @@ export default {
             }).then((response) => {
             })
         },
+        getOzon(){
+            axios.get(`${BASE_URL}/ozon_api_key/`,
+            {
+                headers:{
+                    Authorization: 'Token ' + localStorage.getItem('usertoken')
+                }
+            }).then((response) => {
+                this.ozon_api_key = response.data.api_key
+                this.ozon_client_id = response.data.client_id
+            })
+        },
+        getKaspi(){
+            axios.get(`${BASE_URL}/kaspi_token_api/` ,
+            {
+                headers:{
+                    Authorization: 'Token ' + localStorage.getItem('usertoken')
+                }
+            }).then((response) => {
+                this.kaspi_key = response.data.token_api
+            })
+        }
     },
     mounted() {
+        this.getOzon(),
+        this.getKaspi()
     },
 }
 </script>
