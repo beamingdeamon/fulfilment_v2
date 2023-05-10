@@ -12,16 +12,67 @@
                     Добавить заявку
                 </v-btn>
             </router-link>
-            <v-btn
-                color="green"
-                dark
-                small
-                class="mt-5 ml-5"
-                @click="acceptRequests"
-            >
-                Принять в обработку
-            </v-btn>
+            <div class="filter-cont">
+                <v-btn
+                    color="green"
+                    dark
+                    small
+                    class="mt-5 ml-5"
+                    @click="acceptRequests"
+                >
+                    Принять в обработку
+                </v-btn>
+                <div class="filter-wrapper">
+                    <v-menu
+                        ref="menu"
+                        v-model="menu"
+                        :close-on-content-click="false"
+                        :return-value.sync="date"
+                        transition="scale-transition"
+                        offset-y
+                        min-width="auto"
+                    >
+                        <template v-slot:activator="{ on, attrs }">
+                        <v-text-field
+                            v-model="dateRangeText"
+                            label="от ~ до"
+                            prepend-icon="mdi-calendar"
+                            readonly
+                            v-bind="attrs"
+                            v-on="on"
+                        ></v-text-field>
+                        </template>
+                        <v-date-picker
+                        v-model="dates"
+                        no-title
+                        scrollable
+                        range
+                        >
+                        <v-spacer></v-spacer>
+                        <v-btn
+                            text
+                            color="primary"
+                            @click="menu = false"
+                        >
+                            Cancel
+                        </v-btn>
+                        <v-btn
+                            text
+                            color="primary"
+                            @click="$refs.menu.save(date)"
+                        >
+                            OK
+                        </v-btn>
+                        </v-date-picker>
+                    </v-menu>
+                    <v-btn @click="searchByDate" color="primary" small class="ml-2">
+                        Поиск
+                    </v-btn>
+                </div>
+            </div>
             
+            
+
             <v-simple-table>
                 <template v-slot:default>
                 <thead>
@@ -101,7 +152,8 @@ export default {
     data: () => ({
         ordersList: [],
         status: '',
-        role: ''
+        role: '',
+        dates: ['', '']
     }),
     methods: {
         acceptRequests(){
@@ -117,8 +169,34 @@ export default {
                 console.log(response)
             })
         },
+        searchByDate(){
+            if(new Date(this.dates[0]) > new Date(this.dates[1])){
+                let date;
+                date =  this.dates[0];
+                this.dates[0] = this.dates[1]
+                this.dates[1] = date
+            }
+            let date1 = new Date(this.dates[0]);
+            let date2 = new Date(this.dates[1]);
+            axios.post(`${BASE_URL}/ozon/unfulfilled/list/ `,{
+                "cutoff_from" : date1,
+                "cutoff_to": date2
+            },
+            {
+                headers:{
+                    Authorization: 'Token ' + localStorage.getItem('usertoken')
+                }
+            }).then((response) => {
+                
+                this.ordersList = response.data
+            })
+
+        },
         getOrderList(){
-            axios.get(`${BASE_URL}/ozon/unfulfilled/list/  `,
+            axios.post(`${BASE_URL}/ozon/unfulfilled/list/  `,{
+                "cutoff_from": null,
+                "cutoff_to": null
+            },
             {
                 headers:{
                     Authorization: 'Token ' + localStorage.getItem('usertoken')
@@ -136,11 +214,26 @@ export default {
         this.getUserRole(),
         this.getOrderList()
         // this.getStatusList()
-    }
+    },
+    computed: {
+      dateRangeText () {
+        return this.dates.join(' ~ ')
+      },
+    },
 }
 </script>
 
 <style lang="sass" scoped>
+.filter-cont
+    display: flex
+    flex-direction: row
+    .filter-wrapper
+        margin-left: 60vw
+        display: flex
+        flex-direction: row
+        align-items: center
+        justify-content: center
+        width: 20vw
 .download-wrapper
     display: flex
     align-items: center

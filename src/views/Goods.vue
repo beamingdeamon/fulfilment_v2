@@ -79,7 +79,7 @@
                     class = "goods-list"
                     >
                         <td>{{ index + 1 }}</td>
-                        <td>{{good.seller.username}} </td>
+                        <td v-if="role === 'Admin_ff'">{{good.seller.username}} </td>
                         
                         <td>{{ good.title }}</td>
                         <td>{{ good.vendor_code }}</td>

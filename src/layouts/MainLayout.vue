@@ -94,11 +94,11 @@
                     </router-link>
 
 
-                    <router-link to="/returns">
+                    <!-- <router-link to="/returns">
                         <v-list-item>
                             <v-list-item-title>Возврат и брак</v-list-item-title>
                         </v-list-item>
-                    </router-link>
+                    </router-link> -->
 
                     <router-link to="/keys">
                         <v-list-item>
@@ -162,6 +162,8 @@ export default {
                     }
                 }
                 this.getUserRole()
+            }).catch(error => {
+                this.$router.push("/login")
             })
         },
         getUserRole(){
@@ -174,6 +176,8 @@ export default {
                 
                 this.role = response.data.role
                 localStorage.setItem('user_role', response.data.role)
+            }).catch(error => {
+                console.log(error.response.data.error)
             })
         }
     },
