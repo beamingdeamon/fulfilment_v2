@@ -131,10 +131,13 @@
                         <td v-if="role == 'Admin_ff'">{{ order.cell_number }}</td>
                         <td>{{ order.package }}</td>
                         <td v-if="role == 'Admin_ff'">{{ order.status }}</td>
-                        <td>
+                        <td v-show="order.resource != 'kaspi'">
                             <router-link :to="{name: 'requests-view', params: {id: index}}">
                                 Перейти
                             </router-link>
+                        </td>
+                        <td v-if="order.resource == 'kaspi'">
+                            <button @click="acceptKapiResquest(order)">Принять в обработку</button>
                         </td>
                          <!-- <td class="download-wrapper">
                                 <a href="/test.pdf" download="PDF" ><img src="../../assets/download-icon.png" alt="" class="download-icon"></a>
@@ -160,6 +163,21 @@ export default {
         current_page: "kaspi"
     }),
     methods: {
+        acceptKapiResquest(req){
+            axios.post(`${BASE_URL}/kaspi/assemble/  `,{
+                "id" : req.id,
+                "code": req.code,
+                "waybill": req.waybill,
+                "related_link" : req.related_link
+            },
+            {
+                headers:{
+                    Authorization: 'Token ' + localStorage.getItem('usertoken')
+                }
+            }).then((response) => { 
+                alert("Sucess")
+            })
+        },
         kaspiResponseToOzonFormat(response_data){
             let array = []
             for (const item of response_data) {
