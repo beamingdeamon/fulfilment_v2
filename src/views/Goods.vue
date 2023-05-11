@@ -87,9 +87,9 @@
                         <td>{{ good.bar_code }}</td>
                         <td>{{ good.good_quantity }}</td>
                         <td>{{ good.weight }}</td>
-                        <td>{{ good.height_m }}</td>
-                        <td>{{ good.width_m }}</td>
-                        <td>{{ good.length_m }}</td>
+                        <td>{{ Math.trunc(good.height_m) }}</td>
+                        <td>{{ Math.trunc(good.width_m) }}</td>
+                        <td>{{ Math.trunc(good.length_m) }}</td>
                         <td>{{ good.capacity_m3 }}</td>
                     </tr>
                 </tbody>

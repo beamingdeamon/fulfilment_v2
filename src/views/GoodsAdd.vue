@@ -98,6 +98,7 @@
                             label= "Вес" 
                             placeholder="1"
                             :error-messages="numberErrors"
+                            
                         />
                     </div>
                     <div class = "input-item">
@@ -162,6 +163,7 @@ export default {
     methods:{
         triggerCapacity(){
             this.capacity_m3 = ((this.goodsItem.height_m * this.goodsItem.width_m * this.goodsItem.length_m) / 1000000) * this.goodsItem.good_quantity
+            
             this.capacity_m3 = this.capacity_m3.toFixed(3)
             console.log(this.capacity_m3)
         },
@@ -187,9 +189,11 @@ export default {
                     Authorization: 'Token ' + localStorage.getItem('usertoken')
                 }
             }).then((response) => {
-               
+               response.data.height_m = Math.trunc(response.data.height_m)
+               response.data.width_m= Math.trunc(response.data.width_m)
+               response.data.length_m= Math.trunc(response.data.length_m)
                 this.goodsItem = response.data
-                this.capacity_m3 = ((this.goodsItem.height_m * this.goodsItem.width_m * this.goodsItem.length_m) / 100) * this.goodsItem.good_quantity
+                this.capacity_m3 = ((this.goodsItem.height_m * this.goodsItem.width_m * this.goodsItem.length_m) / 1000000) * this.goodsItem.good_quantity
             })
         },
         changeGoods(){
