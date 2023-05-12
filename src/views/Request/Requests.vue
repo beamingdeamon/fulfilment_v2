@@ -173,7 +173,8 @@ export default {
                 "id" : req.id,
                 "code": req.code,
                 "waybill": req.waybill,
-                "related_link" : req.related_link
+                "related_link" : req.related_link,
+                "delivery_method": req.delivery_method
             },
             {
                 headers:{
