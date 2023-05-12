@@ -169,6 +169,7 @@ export default {
     methods: {
         acceptKapiResquest(req){
             axios.post(`${BASE_URL}/kaspi/assemble/  `,{
+                "seller_id": req.seller.id,
                 "id" : req.id,
                 "code": req.code,
                 "waybill": req.waybill,
