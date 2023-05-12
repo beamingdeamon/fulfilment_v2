@@ -87,7 +87,10 @@
                             Организация
                         </th>
                         <th class="text-left">
-                            Дата
+                            Дата создания
+                        </th>
+                        <th class="text-left">
+                            Дата отправки
                         </th>
                         <th class="text-left">
                             Адрес доставки
@@ -124,7 +127,8 @@
                     >
                         <td>{{ index + 1 }}</td>
                         <td v-if="role == 'Admin_ff'">{{ order.seller.username}}</td>
-                        <td>{{ order.date }}</td>
+                        <td>{{ order.creation_date }}</td>
+                        <td>{{ order.transmission_date }}</td>
                         <td>{{ order.address }}</td>
                         <td>{{ order.delivery_method}}</td>
                         <td v-if="role == 'Admin_ff'">{{ order.barcodes?.lower_barcode}}</td>
@@ -269,8 +273,8 @@ export default {
             date_from = this.validateDate(date_from)
 
             axios.post(`${BASE_URL}/kaspi/orders/ `,{
-                "cutoff_from" : "2023-05-04 00:00:00",
-                "cutoff_to": "2023-05-11 00:00:00"
+                "cutoff_from" : date_from,
+                "cutoff_to": date_now
             },
             {
                 headers:{
